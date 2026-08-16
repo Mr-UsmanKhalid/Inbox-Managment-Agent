@@ -1,0 +1,10 @@
+{
+  "id": "msg-002",
+  "threadId": "thread-002",
+  "channel": "mock",
+  "from": "mike.t@example.com",
+  "to": "support@ourcompany.com",
+  "subject": "TERRIBLE experience - demanding refund",
+  "body": "This is the third time I'm emailing about order #91002. The product arrived broken and nobody has responded in 5 days. I want a full refund of $650 immediately or I'm disputing the charge with my bank and leaving reviews everywhere.",
+  "receivedAt": "2026-08-14T10:02:00Z"
+}

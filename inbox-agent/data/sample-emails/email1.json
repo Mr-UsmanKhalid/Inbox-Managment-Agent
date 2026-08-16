@@ -1,0 +1,10 @@
+{
+  "id": "msg-001",
+  "threadId": "thread-001",
+  "channel": "mock",
+  "from": "sarah.jones@example.com",
+  "to": "support@ourcompany.com",
+  "subject": "Where is my order #48213?",
+  "body": "Hi, I ordered a set of headphones last week (order #48213) and it still says processing. Can you tell me when it will ship? Thanks, Sarah",
+  "receivedAt": "2026-08-14T09:15:00Z"
+}

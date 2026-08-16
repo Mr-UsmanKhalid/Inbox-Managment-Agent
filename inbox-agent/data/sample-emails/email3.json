@@ -1,0 +1,10 @@
+{
+  "id": "msg-003",
+  "threadId": "thread-003",
+  "channel": "mock",
+  "from": "procurement@bigcorp.com",
+  "to": "sales@ourcompany.com",
+  "subject": "Enterprise plan for 500 seats",
+  "body": "Hello, we're evaluating your product for our 500-person team and would like to discuss Enterprise pricing and a custom contract with SSO requirements. Can someone from sales reach out?",
+  "receivedAt": "2026-08-14T11:30:00Z"
+}

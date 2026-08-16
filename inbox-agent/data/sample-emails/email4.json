@@ -1,0 +1,10 @@
+{
+  "id": "msg-004",
+  "threadId": "thread-004",
+  "channel": "mock",
+  "from": "newuser22@example.com",
+  "to": "support@ourcompany.com",
+  "subject": "How long is the free trial?",
+  "body": "Quick question - how many days is the free trial and do I need a credit card to start it?",
+  "receivedAt": "2026-08-14T12:00:00Z"
+}
