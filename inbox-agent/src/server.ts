@@ -8,7 +8,7 @@ import { upsertConversationStatus, appendAuditEntries } from "./storage/db.js";
 import { isMockMode, getActiveProvider } from "./llm.js";
 import { DashboardThread, threadFromAgentState, ThreadStatus } from "./api/mapThread.js";
 
-const PORT = Number(process.env.PORT || 4000);
+ 
 const DASHBOARD_ORIGIN = process.env.DASHBOARD_ORIGIN || "http://localhost:3000";
 
 // In-memory table of processed threads, keyed by threadId. This is what the
@@ -127,15 +127,4 @@ app.post("/api/threads/:id/action", async (req: Request, res: Response) => {
   res.json({ thread });
 });
 
-async function main() {
-  await warmUp();
-  app.listen(PORT, () => {
-    console.log(`Inbox agent API listening on http://localhost:${PORT}`);
-    console.log(`Allowing requests from dashboard origin: ${DASHBOARD_ORIGIN}`);
-  });
-}
-
-main().catch((err) => {
-  console.error("Fatal error starting server:", err);
-  process.exit(1);
-});
+export { app, warmUp };
