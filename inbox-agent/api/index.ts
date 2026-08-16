@@ -1,4 +1,4 @@
-import { app, warmUp } from "../src/server.ts";
+import { app, warmUp } from "../src/server.js";
 
 let initialized = false;
 
