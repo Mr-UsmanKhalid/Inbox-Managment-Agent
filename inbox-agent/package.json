@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -p .",
+    "build:cli": "tsc -p .",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
     "dev:mock": "cross-env MOCK_LLM=true tsx src/index.ts",
