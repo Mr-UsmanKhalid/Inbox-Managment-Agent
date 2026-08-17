@@ -1,16 +1,14 @@
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { EmailConnector } from "./types.js";
 import { InboundMessage } from "../../types.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SAMPLE_DIR = path.resolve(__dirname, "../../../data/sample-emails");
+import { SAMPLE_MESSAGES } from "./sampleMessages.js";
 
 export class MockEmailConnector implements EmailConnector {
   async fetchNewMessages(): Promise<InboundMessage[]> {
-    const files = fs.readdirSync(SAMPLE_DIR).filter((f) => f.endsWith(".json"));
-    return files.map((f) => JSON.parse(fs.readFileSync(path.join(SAMPLE_DIR, f), "utf-8")));
+    // Inlined data (see sampleMessages.ts) rather than read from
+    // data/sample-emails/*.json at runtime - the file-based version worked
+    // locally but crashed on Vercel, since serverless bundlers don't
+    // reliably trace/include files only accessed via fs at runtime.
+    return SAMPLE_MESSAGES;
   }
 
   async fetchThreadHistory(_threadId: string): Promise<InboundMessage[]> {

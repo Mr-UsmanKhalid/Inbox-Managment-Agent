@@ -1,14 +1,9 @@
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { Embeddings } from "@langchain/core/embeddings";
 import { RetrievedChunk } from "../types.js";
 import { isMockMode } from "../llm.js";
 import { getEmbeddings } from "./embeddings.js";
 import { KnowledgeStore } from "./types.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const KB_DIR = path.resolve(__dirname, "../../data/kb");
+import { KB_DOCS } from "./kbDocs.js";
 
 interface KBDoc {
   content: string;
@@ -30,14 +25,18 @@ export class InMemoryVectorStore implements KnowledgeStore {
     return this.embeddings;
   }
 
-  async ingestDirectory(dir: string = KB_DIR): Promise<void> {
-    const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".md") || f.endsWith(".txt")) : [];
-    for (const file of files) {
-      const content = fs.readFileSync(path.join(dir, file), "utf-8");
-      const chunks = chunkText(content, 800);
+  /**
+   * `dir` is accepted for backwards compatibility but ignored - docs are
+   * inlined (see kbDocs.ts) rather than read from disk at runtime, since
+   * that broke on Vercel (serverless bundlers don't reliably include files
+   * only accessed via fs at runtime, even though it works fine locally).
+   */
+  async ingestDirectory(_dir?: string): Promise<void> {
+    for (const doc of KB_DOCS) {
+      const chunks = chunkText(doc.content, 800);
       for (const chunk of chunks) {
         const embedding = await this.embed(chunk);
-        this.docs.push({ content: chunk, source: file, embedding });
+        this.docs.push({ content: chunk, source: doc.source, embedding });
       }
     }
   }

@@ -4,7 +4,15 @@ import { fileURLToPath } from "node:url";
 import { AuditLogEntry, ConversationStatus } from "../types.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.resolve(__dirname, "../../data/db.json");
+
+// Vercel's (and most serverless platforms') filesystem is read-only at
+// runtime everywhere except /tmp - writing to the repo's own data/ folder,
+// which works fine locally, crashes there with EROFS. /tmp is writable but
+// ephemeral (wiped between cold starts, not shared across instances) - fine
+// for a demo's audit log, not a real persistence guarantee. Swap this
+// whole file for Postgres/Mongo before relying on this for anything real;
+// the read/write API surface below (get/set/append) stays the same shape.
+const DB_PATH = process.env.VERCEL ? "/tmp/db.json" : path.resolve(__dirname, "../../data/db.json");
 
 interface ConversationRecord {
   threadId: string;
