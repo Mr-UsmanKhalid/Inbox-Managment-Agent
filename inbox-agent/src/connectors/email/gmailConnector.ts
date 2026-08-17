@@ -52,7 +52,7 @@ export class GmailConnector implements EmailConnector {
 
   async fetchThreadHistory(threadId: string): Promise<InboundMessage[]> {
     const thread = await this.gmail.users.threads.get({ userId: "me", id: threadId, format: "full" });
-    return (thread.data.messages ?? []).map((m) => this.toInboundMessage(m));
+    return (thread.data.messages ?? []).map((m: gmail_v1.Schema$Message) => this.toInboundMessage(m));
   }
 
   async saveDraft(threadId: string, body: string): Promise<void> {
@@ -89,8 +89,8 @@ export class GmailConnector implements EmailConnector {
     const thread = await this.gmail.users.threads.get({ userId: "me", id: threadId, format: "metadata" });
     const first = thread.data.messages?.[0];
     const headers = first?.payload?.headers ?? [];
-    const to = headers.find((h) => h.name === "From")?.value ?? "";
-    const subject = headers.find((h) => h.name === "Subject")?.value ?? "";
+    const to = headers.find((h: gmail_v1.Schema$MessagePartHeader) => h.name === "From")?.value ?? "";
+    const subject = headers.find((h: gmail_v1.Schema$MessagePartHeader) => h.name === "Subject")?.value ?? "";
     return { to, subject };
   }
 
@@ -98,7 +98,7 @@ export class GmailConnector implements EmailConnector {
     if (this.escalatedLabelId) return this.escalatedLabelId;
 
     const { data } = await this.gmail.users.labels.list({ userId: "me" });
-    const existing = data.labels?.find((l) => l.name === "Escalated");
+    const existing = data.labels?.find((l: gmail_v1.Schema$Label) => l.name === "Escalated");
     if (existing?.id) {
       this.escalatedLabelId = existing.id;
       return existing.id;
@@ -108,13 +108,16 @@ export class GmailConnector implements EmailConnector {
       userId: "me",
       requestBody: { name: "Escalated", labelListVisibility: "labelShow", messageListVisibility: "show" },
     });
-    this.escalatedLabelId = created.data.id!;
+    if (!created.data.id) {
+      throw new Error("Gmail API did not return an id for the newly created 'Escalated' label.");
+    }
+    this.escalatedLabelId = created.data.id;
     return this.escalatedLabelId;
   }
 
   private toInboundMessage(m: gmail_v1.Schema$Message): InboundMessage {
     const headers = m.payload?.headers ?? [];
-    const header = (name: string) => headers.find((h) => h.name === name)?.value ?? "";
+    const header = (name: string) => headers.find((h: gmail_v1.Schema$MessagePartHeader) => h.name === name)?.value ?? "";
 
     return {
       id: m.id ?? "",
@@ -133,10 +136,10 @@ function extractBody(payload?: gmail_v1.Schema$MessagePart): string {
   if (!payload) return "";
   if (payload.body?.data) return decodeBase64Url(payload.body.data);
 
-  const plainPart = payload.parts?.find((p) => p.mimeType === "text/plain");
+  const plainPart = payload.parts?.find((p: gmail_v1.Schema$MessagePart) => p.mimeType === "text/plain");
   if (plainPart?.body?.data) return decodeBase64Url(plainPart.body.data);
 
-  const htmlPart = payload.parts?.find((p) => p.mimeType === "text/html");
+  const htmlPart = payload.parts?.find((p: gmail_v1.Schema$MessagePart) => p.mimeType === "text/html");
   if (htmlPart?.body?.data) return decodeBase64Url(htmlPart.body.data).replace(/<[^>]+>/g, " ");
 
   // Nested multipart (e.g. multipart/mixed containing multipart/alternative)
