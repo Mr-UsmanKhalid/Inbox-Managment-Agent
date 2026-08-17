@@ -1,12 +1,15 @@
 import "dotenv/config";
-import { MockEmailConnector } from "./connectors/email/mockConnector.js";
+import { getEmailConnector } from "./connectors/email/index.js";
 import { buildInboxAgentGraph } from "./graph/buildGraph.js";
 import { AgentState, InboundMessage } from "./types.js";
 import { upsertConversationStatus, appendAuditEntries, getAllAuditEntries } from "./storage/db.js";
 import { isMockMode, getActiveProvider } from "./llm.js";
 
-async function processMessage(message: InboundMessage, graph: ReturnType<typeof buildInboxAgentGraph>) {
-  const connector = new MockEmailConnector();
+async function processMessage(
+  message: InboundMessage,
+  graph: ReturnType<typeof buildInboxAgentGraph>,
+  connector: Awaited<ReturnType<typeof getEmailConnector>>
+) {
   const history = await connector.fetchThreadHistory(message.threadId);
 
   const initialState: Partial<AgentState> = {
@@ -52,15 +55,15 @@ async function main() {
   const vectorBackend = (process.env.VECTOR_STORE || "memory").toLowerCase();
   console.log(
     `Running in ${isMockMode() ? "MOCK LLM" : `LIVE (${getActiveProvider()})`} mode. ` +
-      `Vector store: ${vectorBackend}.\n`
+      `Vector store: ${vectorBackend}. Email connector: ${(process.env.EMAIL_CONNECTOR || "mock").toLowerCase()}.\n`
   );
 
-  const connector = new MockEmailConnector();
+  const connector = await getEmailConnector();
   const messages = await connector.fetchNewMessages();
   const graph = buildInboxAgentGraph();
 
   for (const message of messages) {
-    await processMessage(message, graph);
+    await processMessage(message, graph, connector);
   }
 
   const auditLog = await getAllAuditEntries();

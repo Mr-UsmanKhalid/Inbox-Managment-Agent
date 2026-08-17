@@ -2,32 +2,32 @@
   "conversations": [
     {
       "threadId": "thread-001",
-      "status": "resolved_by_human",
-      "lastUpdated": "2026-08-16T17:30:25.507Z",
+      "status": "in_progress",
+      "lastUpdated": "2026-08-17T04:25:52.673Z",
       "lastCategory": "order_status"
     },
     {
       "threadId": "thread-002",
-      "status": "resolved_by_human",
-      "lastUpdated": "2026-08-16T17:32:07.193Z",
+      "status": "escalated",
+      "lastUpdated": "2026-08-17T04:25:52.696Z",
       "lastCategory": "complaint"
     },
     {
       "threadId": "thread-003",
-      "status": "resolved_by_human",
-      "lastUpdated": "2026-08-16T17:29:03.079Z",
+      "status": "escalated",
+      "lastUpdated": "2026-08-17T04:25:52.716Z",
       "lastCategory": "sales_inquiry"
     },
     {
       "threadId": "thread-004",
-      "status": "escalated",
-      "lastUpdated": "2026-08-16T17:30:46.688Z",
+      "status": "in_progress",
+      "lastUpdated": "2026-08-17T04:25:52.739Z",
       "lastCategory": "sales_inquiry"
     }
   ],
   "auditLog": [
     {
-      "timestamp": "2026-08-16T17:27:32.261Z",
+      "timestamp": "2026-08-17T04:20:47.793Z",
       "threadId": "thread-001",
       "messageId": "msg-001",
       "step": "classify",
@@ -39,7 +39,7 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.266Z",
+      "timestamp": "2026-08-17T04:20:47.797Z",
       "threadId": "thread-001",
       "messageId": "msg-001",
       "step": "extract",
@@ -51,7 +51,18 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.275Z",
+      "timestamp": "2026-08-17T04:20:47.803Z",
+      "threadId": "thread-001",
+      "messageId": "msg-001",
+      "step": "enrichCrm",
+      "data": {
+        "found": true,
+        "tier": "standard",
+        "mock": true
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:20:47.810Z",
       "threadId": "thread-001",
       "messageId": "msg-001",
       "step": "retrieve",
@@ -71,7 +82,7 @@
       ]
     },
     {
-      "timestamp": "2026-08-16T17:27:32.278Z",
+      "timestamp": "2026-08-17T04:20:47.813Z",
       "threadId": "thread-001",
       "messageId": "msg-001",
       "step": "draft",
@@ -82,7 +93,7 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.281Z",
+      "timestamp": "2026-08-17T04:20:47.817Z",
       "threadId": "thread-001",
       "messageId": "msg-001",
       "step": "escalate",
@@ -96,7 +107,7 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.342Z",
+      "timestamp": "2026-08-17T04:20:47.894Z",
       "threadId": "thread-002",
       "messageId": "msg-002",
       "step": "classify",
@@ -108,7 +119,7 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.345Z",
+      "timestamp": "2026-08-17T04:20:47.898Z",
       "threadId": "thread-002",
       "messageId": "msg-002",
       "step": "extract",
@@ -122,7 +133,18 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.348Z",
+      "timestamp": "2026-08-17T04:20:47.902Z",
+      "threadId": "thread-002",
+      "messageId": "msg-002",
+      "step": "enrichCrm",
+      "data": {
+        "found": true,
+        "tier": "standard",
+        "mock": true
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:20:47.905Z",
       "threadId": "thread-002",
       "messageId": "msg-002",
       "step": "retrieve",
@@ -142,7 +164,7 @@
       ]
     },
     {
-      "timestamp": "2026-08-16T17:27:32.350Z",
+      "timestamp": "2026-08-17T04:20:47.909Z",
       "threadId": "thread-002",
       "messageId": "msg-002",
       "step": "draft",
@@ -153,26 +175,27 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.352Z",
+      "timestamp": "2026-08-17T04:20:47.912Z",
       "threadId": "thread-002",
       "messageId": "msg-002",
       "step": "escalate",
       "data": {
         "escalation": {
           "escalate": true,
-          "reason": "urgency_score>=70 (90); sentiment=angry; category=complaint; high_dollar_amount ($650)",
+          "reason": "urgency_score>=70 (90); sentiment=angry; category=complaint; high_dollar_amount ($650); crm_open_tickets>=2 (2)",
           "triggeredRules": [
             "urgency_score>=70 (90)",
             "sentiment=angry",
             "category=complaint",
-            "high_dollar_amount ($650)"
+            "high_dollar_amount ($650)",
+            "crm_open_tickets>=2 (2)"
           ]
         },
         "finalAction": "escalate"
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.362Z",
+      "timestamp": "2026-08-17T04:20:47.926Z",
       "threadId": "thread-003",
       "messageId": "msg-003",
       "step": "classify",
@@ -184,7 +207,7 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.364Z",
+      "timestamp": "2026-08-17T04:20:47.928Z",
       "threadId": "thread-003",
       "messageId": "msg-003",
       "step": "extract",
@@ -197,7 +220,18 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.366Z",
+      "timestamp": "2026-08-17T04:20:47.931Z",
+      "threadId": "thread-003",
+      "messageId": "msg-003",
+      "step": "enrichCrm",
+      "data": {
+        "found": true,
+        "tier": "enterprise",
+        "mock": true
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:20:47.934Z",
       "threadId": "thread-003",
       "messageId": "msg-003",
       "step": "retrieve",
@@ -217,7 +251,7 @@
       ]
     },
     {
-      "timestamp": "2026-08-16T17:27:32.369Z",
+      "timestamp": "2026-08-17T04:20:47.940Z",
       "threadId": "thread-003",
       "messageId": "msg-003",
       "step": "draft",
@@ -228,21 +262,23 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.371Z",
+      "timestamp": "2026-08-17T04:20:47.944Z",
       "threadId": "thread-003",
       "messageId": "msg-003",
       "step": "escalate",
       "data": {
         "escalation": {
-          "escalate": false,
-          "reason": "No escalation rules triggered.",
-          "triggeredRules": []
+          "escalate": true,
+          "reason": "crm_tier=enterprise",
+          "triggeredRules": [
+            "crm_tier=enterprise"
+          ]
         },
-        "finalAction": "save_draft"
+        "finalAction": "escalate"
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.380Z",
+      "timestamp": "2026-08-17T04:20:47.959Z",
       "threadId": "thread-004",
       "messageId": "msg-004",
       "step": "classify",
@@ -254,7 +290,7 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.383Z",
+      "timestamp": "2026-08-17T04:20:47.962Z",
       "threadId": "thread-004",
       "messageId": "msg-004",
       "step": "extract",
@@ -267,7 +303,16 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.386Z",
+      "timestamp": "2026-08-17T04:20:47.965Z",
+      "threadId": "thread-004",
+      "messageId": "msg-004",
+      "step": "enrichCrm",
+      "data": {
+        "found": false
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:20:47.972Z",
       "threadId": "thread-004",
       "messageId": "msg-004",
       "step": "retrieve",
@@ -287,7 +332,7 @@
       ]
     },
     {
-      "timestamp": "2026-08-16T17:27:32.388Z",
+      "timestamp": "2026-08-17T04:20:47.975Z",
       "threadId": "thread-004",
       "messageId": "msg-004",
       "step": "draft",
@@ -298,7 +343,337 @@
       }
     },
     {
-      "timestamp": "2026-08-16T17:27:32.390Z",
+      "timestamp": "2026-08-17T04:20:47.977Z",
+      "threadId": "thread-004",
+      "messageId": "msg-004",
+      "step": "escalate",
+      "data": {
+        "escalation": {
+          "escalate": false,
+          "reason": "No escalation rules triggered.",
+          "triggeredRules": []
+        },
+        "finalAction": "save_draft"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.592Z",
+      "threadId": "thread-001",
+      "messageId": "msg-001",
+      "step": "classify",
+      "data": {
+        "category": "order_status",
+        "intent": "Where is my order #48213?",
+        "urgency": 45,
+        "sentiment": "positive"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.596Z",
+      "threadId": "thread-001",
+      "messageId": "msg-001",
+      "step": "extract",
+      "data": {
+        "customerName": "Sarah Jones",
+        "orderNumber": "48213",
+        "dates": [],
+        "requirements": []
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.600Z",
+      "threadId": "thread-001",
+      "messageId": "msg-001",
+      "step": "enrichCrm",
+      "data": {
+        "found": true,
+        "tier": "standard",
+        "mock": true
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.608Z",
+      "threadId": "thread-001",
+      "messageId": "msg-001",
+      "step": "retrieve",
+      "data": [
+        {
+          "source": "shipping-policy.md",
+          "score": 0.42954995199318474
+        },
+        {
+          "source": "returns-refunds.md",
+          "score": 0.40919660368228405
+        },
+        {
+          "source": "pricing-faq.md",
+          "score": 0.33830149765321954
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.611Z",
+      "threadId": "thread-001",
+      "messageId": "msg-001",
+      "step": "draft",
+      "data": {
+        "body": "Hi Sarah Jones,\n\nThanks for your message. Here's what I can share:\n\n[shipping-policy.md] # Shipping Policy\n\nStandard shipping takes 5-7 business days within the country. Express shipping takes 1-2 business days and costs an additional $15.\n\nOrders are processed within 24 hours on business days. You will receive a tracking number by email once your order ships.\n\nIf a package is marked delivered but you have not received it, wait 24 hours (carriers sometimes scan ea\n\nLet me know if you have any other questions!\n\nBest,\nSupport Team",
+        "confidence": 0.75,
+        "usedSources": []
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.614Z",
+      "threadId": "thread-001",
+      "messageId": "msg-001",
+      "step": "escalate",
+      "data": {
+        "escalation": {
+          "escalate": false,
+          "reason": "No escalation rules triggered.",
+          "triggeredRules": []
+        },
+        "finalAction": "save_draft"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.682Z",
+      "threadId": "thread-002",
+      "messageId": "msg-002",
+      "step": "classify",
+      "data": {
+        "category": "complaint",
+        "intent": "TERRIBLE experience - demanding refund",
+        "urgency": 90,
+        "sentiment": "angry"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.685Z",
+      "threadId": "thread-002",
+      "messageId": "msg-002",
+      "step": "extract",
+      "data": {
+        "customerName": "Mike T",
+        "orderNumber": "91002",
+        "dates": [],
+        "requirements": [
+          "wants a refund"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.687Z",
+      "threadId": "thread-002",
+      "messageId": "msg-002",
+      "step": "enrichCrm",
+      "data": {
+        "found": true,
+        "tier": "standard",
+        "mock": true
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.689Z",
+      "threadId": "thread-002",
+      "messageId": "msg-002",
+      "step": "retrieve",
+      "data": [
+        {
+          "source": "shipping-policy.md",
+          "score": 0.4635763954879889
+        },
+        {
+          "source": "returns-refunds.md",
+          "score": 0.4424424322639787
+        },
+        {
+          "source": "pricing-faq.md",
+          "score": 0.4044562880800974
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.691Z",
+      "threadId": "thread-002",
+      "messageId": "msg-002",
+      "step": "draft",
+      "data": {
+        "body": "Hi Mike T,\n\nThanks for your message. Here's what I can share:\n\n[shipping-policy.md] # Shipping Policy\n\nStandard shipping takes 5-7 business days within the country. Express shipping takes 1-2 business days and costs an additional $15.\n\nOrders are processed within 24 hours on business days. You will receive a tracking number by email once your order ships.\n\nIf a package is marked delivered but you have not received it, wait 24 hours (carriers sometimes scan ea\n\nLet me know if you have any other questions!\n\nBest,\nSupport Team",
+        "confidence": 0.75,
+        "usedSources": []
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.693Z",
+      "threadId": "thread-002",
+      "messageId": "msg-002",
+      "step": "escalate",
+      "data": {
+        "escalation": {
+          "escalate": true,
+          "reason": "urgency_score>=70 (90); sentiment=angry; category=complaint; high_dollar_amount ($650); crm_open_tickets>=2 (2)",
+          "triggeredRules": [
+            "urgency_score>=70 (90)",
+            "sentiment=angry",
+            "category=complaint",
+            "high_dollar_amount ($650)",
+            "crm_open_tickets>=2 (2)"
+          ]
+        },
+        "finalAction": "escalate"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.702Z",
+      "threadId": "thread-003",
+      "messageId": "msg-003",
+      "step": "classify",
+      "data": {
+        "category": "sales_inquiry",
+        "intent": "Enterprise plan for 500 seats",
+        "urgency": 15,
+        "sentiment": "neutral"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.705Z",
+      "threadId": "thread-003",
+      "messageId": "msg-003",
+      "step": "extract",
+      "data": {
+        "customerName": "Procurement",
+        "dates": [],
+        "requirements": [
+          "needs SSO"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.707Z",
+      "threadId": "thread-003",
+      "messageId": "msg-003",
+      "step": "enrichCrm",
+      "data": {
+        "found": true,
+        "tier": "enterprise",
+        "mock": true
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.709Z",
+      "threadId": "thread-003",
+      "messageId": "msg-003",
+      "step": "retrieve",
+      "data": [
+        {
+          "source": "shipping-policy.md",
+          "score": 0.5844162781658664
+        },
+        {
+          "source": "pricing-faq.md",
+          "score": 0.533601006132655
+        },
+        {
+          "source": "returns-refunds.md",
+          "score": 0.5179323973782372
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.711Z",
+      "threadId": "thread-003",
+      "messageId": "msg-003",
+      "step": "draft",
+      "data": {
+        "body": "Hi Procurement,\n\nThanks for your message. Here's what I can share:\n\n[shipping-policy.md] # Shipping Policy\n\nStandard shipping takes 5-7 business days within the country. Express shipping takes 1-2 business days and costs an additional $15.\n\nOrders are processed within 24 hours on business days. You will receive a tracking number by email once your order ships.\n\nIf a package is marked delivered but you have not received it, wait 24 hours (carriers sometimes scan ea\n\nLet me know if you have any other questions!\n\nBest,\nSupport Team",
+        "confidence": 0.75,
+        "usedSources": []
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.713Z",
+      "threadId": "thread-003",
+      "messageId": "msg-003",
+      "step": "escalate",
+      "data": {
+        "escalation": {
+          "escalate": true,
+          "reason": "crm_tier=enterprise",
+          "triggeredRules": [
+            "crm_tier=enterprise"
+          ]
+        },
+        "finalAction": "escalate"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.723Z",
+      "threadId": "thread-004",
+      "messageId": "msg-004",
+      "step": "classify",
+      "data": {
+        "category": "sales_inquiry",
+        "intent": "How long is the free trial?",
+        "urgency": 15,
+        "sentiment": "positive"
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.726Z",
+      "threadId": "thread-004",
+      "messageId": "msg-004",
+      "step": "extract",
+      "data": {
+        "customerName": "Newuser22",
+        "dates": [],
+        "requirements": [
+          "asking about free trial terms"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.728Z",
+      "threadId": "thread-004",
+      "messageId": "msg-004",
+      "step": "enrichCrm",
+      "data": {
+        "found": false
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.730Z",
+      "threadId": "thread-004",
+      "messageId": "msg-004",
+      "step": "retrieve",
+      "data": [
+        {
+          "source": "pricing-faq.md",
+          "score": 0.4988944951626844
+        },
+        {
+          "source": "returns-refunds.md",
+          "score": 0.36085565281428206
+        },
+        {
+          "source": "shipping-policy.md",
+          "score": 0.3009856051288392
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.733Z",
+      "threadId": "thread-004",
+      "messageId": "msg-004",
+      "step": "draft",
+      "data": {
+        "body": "Hi Newuser22,\n\nThanks for your message. Here's what I can share:\n\n[pricing-faq.md] # Pricing FAQ\n\nWe offer three plans: Starter ($29/mo), Pro ($99/mo), and Enterprise (custom pricing, contact sales).\n\nAll plans include a 14-day free trial, no credit card required. You can upgrade, downgrade, or cancel at any time from account settings.\n\nEnterprise pricing and custom contract questions should be routed to the sales team rather than answered automatically, since t\n\nLet me know if you have any other questions!\n\nBest,\nSupport Team",
+        "confidence": 0.75,
+        "usedSources": []
+      }
+    },
+    {
+      "timestamp": "2026-08-17T04:25:52.736Z",
       "threadId": "thread-004",
       "messageId": "msg-004",
       "step": "escalate",

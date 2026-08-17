@@ -2,6 +2,7 @@ import { StateGraph, Annotation, START, END } from "@langchain/langgraph";
 import { AgentState } from "../types.js";
 import { classifyNode } from "./nodes/classify.js";
 import { extractNode } from "./nodes/extract.js";
+import { enrichCrmNode } from "./nodes/enrichCrm.js";
 import { retrieveNode } from "./nodes/retrieve.js";
 import { draftNode } from "./nodes/draft.js";
 import { escalateNode } from "./nodes/escalate.js";
@@ -30,12 +31,14 @@ export function buildInboxAgentGraph() {
   const graph = new StateGraph(StateAnnotation)
     .addNode("classify", classifyNode)
     .addNode("extract", extractNode)
+    .addNode("enrichCrm", enrichCrmNode)
     .addNode("retrieve", retrieveNode)
     .addNode("draftReply", draftNode)
     .addNode("escalate", escalateNode)
     .addEdge(START, "classify")
     .addEdge("classify", "extract")
-    .addEdge("extract", "retrieve")
+    .addEdge("extract", "enrichCrm")
+    .addEdge("enrichCrm", "retrieve")
     .addEdge("retrieve", "draftReply")
     .addEdge("draftReply", "escalate")
     .addEdge("escalate", END);

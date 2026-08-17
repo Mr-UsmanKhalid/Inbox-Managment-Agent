@@ -21,6 +21,12 @@ export interface DashboardThread {
     customerName?: string;
     orderNumber?: string;
     requirements: string[];
+    crm?: {
+      tier?: string;
+      lifetimeValue?: string;
+      openTickets?: string;
+      notes?: string;
+    };
   };
   retrieved: { content: string; source: string }[];
   draftBody: string;
@@ -93,6 +99,14 @@ export function threadFromAgentState(message: InboundMessage, result: AgentState
       customerName: result.entities?.customerName,
       orderNumber: result.entities?.orderNumber,
       requirements: result.entities?.requirements ?? [],
+      crm: result.entities?.otherEntities?.crmCustomerId
+        ? {
+            tier: result.entities.otherEntities.crmTier,
+            lifetimeValue: result.entities.otherEntities.crmLifetimeValue,
+            openTickets: result.entities.otherEntities.crmOpenTickets,
+            notes: result.entities.otherEntities.crmNotes,
+          }
+        : undefined,
     },
     retrieved: (result.retrieved ?? []).map((r) => ({ content: r.content, source: r.source })),
     draftBody: result.draft?.body ?? "",

@@ -45,6 +45,17 @@ export async function escalateNode(state: AgentState): Promise<Partial<AgentStat
     triggeredRules.push(`high_dollar_amount ($${dollarMatch[1]})`);
   }
 
+  // CRM enrichment (see graph/nodes/enrichCrm.ts) surfaces account tier and
+  // open-ticket count - route enterprise accounts and anyone with repeat
+  // open tickets to a human rather than auto-handling them.
+  if (entities?.otherEntities?.crmTier === "enterprise") {
+    triggeredRules.push("crm_tier=enterprise");
+  }
+  const openTickets = parseInt(entities?.otherEntities?.crmOpenTickets ?? "", 10);
+  if (!Number.isNaN(openTickets) && openTickets >= 2) {
+    triggeredRules.push(`crm_open_tickets>=2 (${openTickets})`);
+  }
+
   const escalation: EscalationDecision = {
     escalate: triggeredRules.length > 0,
     reason: triggeredRules.length > 0 ? triggeredRules.join("; ") : "No escalation rules triggered.",
